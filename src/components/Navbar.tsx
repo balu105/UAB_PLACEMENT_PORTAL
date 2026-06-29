@@ -217,29 +217,31 @@ export default function Navbar() {
 
         {/* Global actions */}
         <div className={styles.actions}>
-          {pathname !== '/' && (
-            <>
-              {user ? (
-                <div className={styles.userProfileMenu}>
-                  <div className={styles.profileAvatar}>
-                    {user.name ? user.name.charAt(0).toUpperCase() : 'A'}
-                  </div>
-                  <div className={styles.profileDropdown}>
+          {user ? (
+            <div className={styles.userProfileMenu}>
+              <div className={styles.profileAvatar}>
+                {user.name ? user.name.charAt(0).toUpperCase() : 'A'}
+              </div>
+              <div className={styles.profileDropdown}>
+                {!pathname.startsWith('/admin') && (
+                  <>
                     <Link href="/admin" className={styles.profileLink}>
                       <Shield size={16} /> Admin Panel
                     </Link>
                     <div className={styles.divider} />
-                    <button className={styles.profileLink} onClick={handleLogout}>
-                      <LogOut size={16} /> Logout
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <Link href="/admin" className={styles.signupBtn} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Shield size={16} /> Admin Portal
-                </Link>
-              )}
-            </>
+                  </>
+                )}
+                <button className={styles.profileLink} onClick={handleLogout}>
+                  <LogOut size={16} /> Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            pathname !== '/' && !pathname.startsWith('/admin') && pathname !== '/login' && (
+              <Link href="/admin" className={styles.signupBtn} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Shield size={16} /> Admin Portal
+              </Link>
+            )
           )}
         </div>
       </div>
