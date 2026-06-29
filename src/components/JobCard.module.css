@@ -1,0 +1,274 @@
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
+
+/* Banner Image Styles */
+.banner {
+  height: 155px;
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Gradients list for varied visuals */
+.gradientBlue {
+  background: linear-gradient(135deg, #0d1326 0%, #1a365d 100%);
+}
+
+.gradientIndigo {
+  background: linear-gradient(135deg, #0b0f1f 0%, #2e1a47 100%);
+}
+
+.gradientPurple {
+  background: linear-gradient(135deg, #0a0817 0%, #311154 100%);
+}
+
+.bannerInfo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.bannerCompany {
+  background-color: #ffffff;
+  color: #0d1527;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 850;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.2px;
+}
+
+.verifiedIcon {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.bannerHiringTag {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 850;
+  margin-top: 6px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.bannerApplyBadge {
+  background: linear-gradient(180deg, #ff3b30 0%, #c30000 100%);
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  width: fit-content;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.5px;
+  margin-top: auto;
+}
+
+/* Right Silhouette graphic */
+.silhouetteContainer {
+  position: absolute;
+  right: 12px;
+  bottom: -15px;
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.silhouetteGlow {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  bottom: 15px;
+}
+
+.silhouetteSvg {
+  width: 75px;
+  height: 75px;
+  color: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
+
+/* Card details styling */
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.badgeRow {
+  margin-bottom: 10px;
+}
+
+.updatesBadge {
+  background-color: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.title {
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+}
+
+.titleLink {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 1.05rem;
+  transition: color var(--transition-fast);
+}
+
+.titleLink:hover {
+  color: var(--primary);
+}
+
+.excerpt {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.metaGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-bottom: 14px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.skillsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skillTag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.footer {
+  padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bookmarkBtn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.bookmarkBtn:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.bookmarkBtnActive {
+  background-color: hsl(var(--p-h), var(--p-s), var(--p-l), 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.bookmarkBtnActive:hover {
+  background-color: hsl(var(--p-h), var(--p-s), var(--p-l), 0.15);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.applyBtn {
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.applyBtn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}

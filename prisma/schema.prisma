@@ -1,0 +1,175 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  password     String
+  name         String?
+  role         String        @default("CANDIDATE") // "ADMIN" or "CANDIDATE"
+  avatarUrl    String?
+  resumeUrl    String?
+  resumeText   String? @db.Text
+  skills       String?       // Comma-separated list of skills
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  bookmarks    Bookmark[]
+  notifications Notification[]
+  activityLogs  ActivityLog[]
+}
+
+model Company {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  slug        String   @unique
+  logoUrl     String?
+  website     String
+  description String?  @db.Text
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  jobs        Job[]
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  jobs      Job[]
+}
+
+model Job {
+  id             String     @id @default(uuid())
+  title          String
+  slug           String     @unique
+  description    String     @db.Text
+  requirements   String?    @db.Text
+  applyUrl       String
+  verifiedSource Boolean    @default(false)
+  type           String     // "Full-time", "Part-time", "Contract", "Remote"
+  location       String
+  salaryRange    String?
+  skills         String?    // Comma-separated list of skills
+  status         String     @default("PUBLISHED") // "DRAFT" or "PUBLISHED"
+  views          Int        @default(0)
+  companyId      String
+  company        Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  categoryId     String
+  category       Category   @relation(fields: [categoryId], references: [id])
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  bookmarks      Bookmark[]
+  clicks         JobClick[]
+
+  @@index([companyId])
+  @@index([categoryId])
+}
+
+model Resource {
+  id          String     @id @default(uuid())
+  title       String
+  slug        String     @unique
+  type        String     // "INTERVIEW_QUESTION" or "PLACEMENT_PAPER"
+  content     String     @db.Text // Markdown formatted content or QA JSON
+  category    String?    // e.g. "Javascript", "System Design"
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  bookmarks   Bookmark[]
+}
+
+model Blog {
+  id          String    @id @default(uuid())
+  title       String
+  slug        String    @unique
+  content     String    @db.Text
+  excerpt     String?   @db.Text
+  coverImage  String?
+  publishedAt DateTime?
+  status      String    @default("PUBLISHED") // "DRAFT" or "PUBLISHED"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Bookmark {
+  id         String    @id @default(uuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId      String?
+  job        Job?      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  resourceId String?
+  resource   Resource? @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+
+  @@unique([userId, jobId])
+  @@unique([userId, resourceId])
+  @@index([userId])
+  @@index([jobId])
+  @@index([resourceId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Advertisement {
+  id          String    @id @default(uuid())
+  title       String
+  placement   String    // "SIDEBAR", "BANNER", "INLINE"
+  imageUrl    String
+  targetUrl   String
+  startDate   DateTime?
+  endDate     DateTime?
+  active      Boolean   @default(true)
+  impressions Int       @default(0)
+  clicks      Int       @default(0)
+  createdAt   DateTime  @default(now())
+}
+
+model JobClick {
+  id        String   @id @default(uuid())
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  userId    String?  // Optional candidate who clicked
+  createdAt DateTime @default(now())
+
+  @@index([jobId])
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  details   String?  @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model SystemSetting {
+  key   String @id
+  value String @db.Text
+}

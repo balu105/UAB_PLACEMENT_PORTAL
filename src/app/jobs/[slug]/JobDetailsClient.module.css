@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.actionPanel {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.bookmarkBtn {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.bookmarkBtn:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+  color: var(--primary);
+}
+
+.bookmarkBtnActive {
+  color: var(--primary);
+  border-color: var(--primary);
+  background-color: hsl(var(--p-h), var(--p-s), var(--p-l), 0.05);
+}
+
+.applyBtn {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 28px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast);
+  flex: 1;
+  justify-content: center;
+}
+
+.applyBtn:hover {
+  background-color: hsl(var(--p-h), var(--p-s), calc(var(--p-l) - 5%));
+}
+
+@media (max-width: 640px) {
+  .actionPanel {
+    flex-direction: column-reverse;
+  }
+}
