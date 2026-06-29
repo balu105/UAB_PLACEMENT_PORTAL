@@ -108,8 +108,8 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## 🔐 Credentials
 
 ### Admin Account (Admin Panel)
-*   **Email**: `admin@careerlaunch.com`
-*   **Password**: `adminpassword123`
+*   **Email**: `balaji918214@gmail.com`
+*   **Password**: `balu123@`
 
 ### Candidate Account
 *   **Email**: `candidate@careerlaunch.com`

@@ -11,8 +11,8 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/admin';
 
-  const [email, setEmail] = useState('admin@careerlaunch.com');
-  const [password, setPassword] = useState('adminpassword123');
+  const [email, setEmail] = useState('balaji918214@gmail.com');
+  const [password, setPassword] = useState('balu123@');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 

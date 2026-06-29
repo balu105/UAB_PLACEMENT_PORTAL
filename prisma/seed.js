@@ -24,10 +24,10 @@ async function main() {
   console.log('Database cleaned.');
 
   // 2. Create Users
-  const adminPasswordHash = await bcrypt.hash('adminpassword123', 10);
+  const adminPasswordHash = await bcrypt.hash('balu123@', 10);
   const adminUser = await prisma.user.create({
     data: {
-      email: 'admin@careerlaunch.com',
+      email: 'balaji918214@gmail.com',
       password: adminPasswordHash,
       name: 'Super Admin',
       role: 'ADMIN',
@@ -46,7 +46,7 @@ async function main() {
     },
   });
 
-  console.log('Users created: Admin (admin@careerlaunch.com), Candidate (candidate@careerlaunch.com).');
+  console.log('Users created: Admin (balaji918214@gmail.com), Candidate (candidate@careerlaunch.com).');
 
   // 3. Create Categories
   const categories = [
